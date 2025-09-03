@@ -1,0 +1,44 @@
+<template>
+	<div class="dialog" v-if="show" @click="hideDialog">
+		<div @click.stop class="dialog-content">
+			<slot></slot>
+		</div>
+	</div>
+</template>
+
+<script>
+import toggleMixin from '@/mixins/toggleMixin';
+
+export default {
+	name: 'my-dialog',
+	mixins: [toggleMixin],
+	mounted() {
+		// console.log('mounted');
+	},
+};
+</script>
+
+<style lang="scss" scoped>
+.dialog {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+	color: black;
+
+	.dialog-content {
+		width: 500px;
+		min-height: 400px;
+		background: white;
+		border-radius: 10px;
+		padding: 20px;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+	}
+}
+</style>
