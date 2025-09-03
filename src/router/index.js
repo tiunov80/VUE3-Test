@@ -15,9 +15,10 @@ const router = createRouter({
       component: () => import('../views/CountriesPage.vue'),
     },
     {
-      path: '/posts/:id',
-      name: 'posts',
-      component: () => import('../views/postIdPage.vue'),
+      path: '/country/:code',
+      name: 'CountryDetail',
+      component: () => import('@/views/CountryDetail.vue'),
+      props: true
     },
   ],
 });

@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<h1>Post page id {{ $route.params.id }}</h1>
+		<h1>Country page {{ $route.params.id }}</h1>
 	</div>
 </template>
 

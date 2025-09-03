@@ -1,199 +1,121 @@
 <template>
 	<div class="test-page">
-		<div>{{ $store.state.likes }}</div>
-		<h1>This is a Test page</h1>
-		<my-input
-			v-focus
-			v-model="searchQuery"
-			placeholder="Search..."
-		></my-input>
-		<div class="app_btns">
-			<my-button @click="showDialog" class="add_post_btn"
-				>Create new post</my-button
-			>
+		<h1>Countries</h1>
+		<div class="page-tools">
+			<my-input
+				v-focus
+				v-model="searchQuery"
+				placeholder="Search country..."
+			></my-input>
 			<my-select
 				v-model="selectedSort"
 				:options="sortOptions"
 			></my-select>
 		</div>
 
-		<my-dialog v-model:show="dialogVisible">
-			<post-form @create="createPost" />
-		</my-dialog>
-
-		<post-list
-			:posts="sortedAndSearchedPosts"
-			@remove="removePost"
-			v-if="!isPostsLoading"
+		<country-list
+			:countries="displayedCountries"
+			v-if="!isCountriesLoading"
 		/>
 
 		<div v-else>Loading...</div>
-		<div v-intersection="loadMorePosts" class="observer"></div>
+		<div v-intersection="loadMoreCountries" class="observer"></div>
 	</div>
 </template>
 
 <script>
-import PostForm from '@/components/PostForm.vue';
-import PostList from '@/components/PostList.vue';
 import axios from 'axios';
+
+// список стран
+import CountryList from '@/components/CountryList.vue';
 
 export default {
 	components: {
-		PostList,
-		PostForm,
+		CountryList,
 	},
 	data() {
 		return {
-			posts: [],
-			dialogVisible: false,
-			isPostsLoading: false,
-			modificatorValue: '',
+			countries: [],
+			isCountriesLoading: false,
 			selectedSort: '',
 			searchQuery: '',
 			page: 1,
-			limit: 8,
-			totalPages: 0,
+			limit: 15,
 			sortOptions: [
-				{ value: 'title', name: 'By title' },
-				{ value: 'body', name: 'By Description' },
-				// { value: 'ID', name: 'By ID' },
+				{ value: 'name', name: 'Sort by Name' },
+				{ value: 'capital', name: 'Sort by Capital' },
+				{ value: 'region', name: 'Sort by Region' },
 			],
 		};
 	},
 
 	methods: {
-		createPost(post) {
-			this.posts.push(post);
-			// console.log(post);
-			this.dialogVisible = false;
-		},
-		removePost(post) {
-			this.posts = this.posts.filter((p) => p.id !== post.id);
-		},
-		showDialog() {
-			this.dialogVisible = true;
-		},
-		async fetchPosts() {
+		async fetchCountries() {
 			try {
-				this.isPostsLoading = true;
+				this.isCountriesLoading = true;
 				const response = await axios.get(
-					'https://jsonplaceholder.typicode.com/posts',
-					{
-						params: {
-							_page: this.page,
-							_limit: this.limit,
-						},
-					},
+					'https://cors-anywhere.herokuapp.com/https://www.apicountries.com/countries',
 				);
-				this.totalPages = Math.ceil(
-					response.headers['x-total-count'] / this.limit,
-				);
-				this.posts = response.data;
-				// console.log(response);
+				this.countries = response.data;
 			} catch (e) {
-				alert('error');
+				alert('Error while loading countries');
 			} finally {
-				this.isPostsLoading = false;
+				this.isCountriesLoading = false;
 			}
 		},
-		async loadMorePosts() {
-			try {
+		loadMoreCountries() {
+			// если ещё есть страны, увеличиваем page для отображения следующих элементов
+			if (
+				this.page * this.limit <
+				this.sortedAndSearchedCountries.length
+			) {
 				this.page += 1;
-				const response = await axios.get(
-					'https://jsonplaceholder.typicode.com/posts',
-					{
-						params: {
-							_page: this.page,
-							_limit: this.limit,
-						},
-					},
-				);
-				this.totalPages = Math.ceil(
-					response.headers['x-total-count'] / this.limit,
-				);
-				this.posts = [...this.posts, ...response.data];
-				// console.log(response);
-			} catch (e) {
-				alert('error');
-			} finally {
 			}
 		},
 	},
-	mounted() {
-		this.fetchPosts();
-		// console.log(this.$refs.observer);
-	},
+
 	computed: {
-		sortedPosts() {
-			return [...this.posts].sort((post1, post2) =>
-				String(post1[this.selectedSort]).localeCompare(
-					String(post2[this.selectedSort]),
+		sortedCountries() {
+			if (!this.selectedSort) return this.countries;
+			return [...this.countries].sort((a, b) =>
+				String(a[this.selectedSort] || '').localeCompare(
+					String(b[this.selectedSort] || ''),
 				),
 			);
 		},
-		sortedAndSearchedPosts() {
-			return this.sortedPosts.filter((post) =>
-				post.title
+		sortedAndSearchedCountries() {
+			return this.sortedCountries.filter((c) =>
+				c.name
 					.toLowerCase()
 					.includes(this.searchQuery.toLowerCase()),
 			);
 		},
+		displayedCountries() {
+			return this.sortedAndSearchedCountries.slice(
+				0,
+				this.page * this.limit,
+			);
+		},
 	},
-	watch: {
-		// page() {
-		// 	this.fetchPosts();
-		// },
-		// 	selectedSort(newValue) {
-		// 		if (!newValue) return;
-		// 		this.posts = [...this.posts].sort((post1, post2) =>
-		// 			String(post1[newValue]).localeCompare(
-		// 				String(post2[newValue]),
-		// 			),
-		// 		);
-		// 	},
+
+	mounted() {
+		this.fetchCountries();
 	},
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped lang="scss">
 .test-page {
 	padding: 20px;
 }
-.add_post_btn {
-	margin-bottom: 20px;
-	background: #00bd7e;
-	color: white;
-	padding: 10px 20px;
-	border: none;
-	border-radius: 10px;
-	font-weight: bold;
-	cursor: pointer;
-}
-.app_btns {
+.page-tools {
 	display: flex;
 	justify-content: space-between;
-}
-.page-wrapper {
-	display: flex;
-	gap: 15px;
-}
-.page {
-	display: flex;
+	margin-bottom: 20px;
 	align-items: center;
-	justify-content: center;
-	cursor: pointer;
-	border: 1px solid white;
-	border-radius: 50%;
-	padding: 2px;
-	width: 30px;
-	height: 30px;
-}
-.carent-page {
-	background: #00bd7e;
-	color: black;
 }
 .observer {
-	background: #00bd7e;
+	background: transparent;
 	padding: 10px;
 }
 </style>

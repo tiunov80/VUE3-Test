@@ -1,6 +1,12 @@
 <template>
-	<select :value="modelValue" name="" id="" class="select" @change="changeOption">
-		<option disabled value="">Choose from the list</option>
+	<select
+		:value="modelValue"
+		name="select"
+		id=""
+		class="select"
+		@change="changeOption"
+	>
+		<option disabled value="">Sort by...</option>
 		<option
 			v-for="option in options"
 			:key="option.value"
@@ -35,7 +41,17 @@ export default {
 <style lang="scss" scoped>
 .select {
 	display: flex;
-	height: 30px;
-	padding: 2px 10px;
+	border: 2px solid #ffffff;
+	background: transparent;
+	padding: 10px;
+	border-radius: 6px;
+	color: #ffffff;
+	font-size: 16px;
+	option {
+		color: black;
+	}
+	&:focus {
+		outline: 4px solid #00bd7e;
+	}
 }
 </style>

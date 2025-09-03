@@ -1,5 +1,5 @@
 <template>
-	<input :value="modelValue" @input="updateInput" class="post-input" />
+	<input :value="modelValue" @input="updateInput" class="search-input" name="inp" />
 </template>
 
 <script>
@@ -19,11 +19,18 @@ export default {
 </script>
 
 <style lang="scss">
-.post-input {
+.search-input {
 	width: 50%;
-	margin-bottom: 20px;
 	display: block;
-	border: 2px solid #00bd7e;
+	border: 2px solid #ffffff;
+	background: transparent;
 	padding: 10px;
+	border-radius: 6px;
+	color: #ffffff;
+	font-size: 16px;
+
+	&:focus {
+		outline: 4px solid #00bd7e;
+	}
 }
 </style>
