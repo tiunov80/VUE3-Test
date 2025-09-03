@@ -27,3 +27,6 @@ npm run dev
 ```sh
 npm run build
 ```
+I use temporary CORS proxies instead of this link https://www.apicountries.com/countries.
+Because of CORS.
+https://cors-anywhere.herokuapp.com/https://www.apicountries.com/countries
