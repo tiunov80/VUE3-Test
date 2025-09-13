@@ -31,3 +31,11 @@ npm run build
 I use temporary CORS proxies instead of this link https://www.apicountries.com/countries.
 Because of CORS.
 https://cors-anywhere.herokuapp.com/https://www.apicountries.com/countries
+
+instruction:
+
+This demo of CORS Anywhere should only be used for development purposes, see https://github.com/Rob--W/cors-anywhere/issues/301.
+
+To temporarily unlock access to the demo, click on the following button: 
+
+You currently have temporary access to the demo server.
