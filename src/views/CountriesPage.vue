@@ -26,7 +26,7 @@
 <script>
 import axios from 'axios';
 
-// список стран
+// country list
 import CountryList from '@/components/CountryList.vue';
 
 export default {
@@ -64,7 +64,7 @@ export default {
 			}
 		},
 		loadMoreCountries() {
-			// если ещё есть страны, увеличиваем page для отображения следующих элементов
+			// if there are still countries, increase the page to display the following elements
 			if (
 				this.page * this.limit <
 				this.sortedAndSearchedCountries.length

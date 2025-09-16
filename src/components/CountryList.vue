@@ -25,7 +25,7 @@ export default {
 	},
 	methods: {
 		goToCountry(country) {
-			// Переход на страницу страны
+			// Go to country page
 			this.$router.push({
 				name: 'CountryDetail',
 				params: { code: country.alpha2Code },
