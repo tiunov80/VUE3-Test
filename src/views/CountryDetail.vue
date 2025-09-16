@@ -22,6 +22,18 @@
 			<strong class="country-label">NativeName:</strong>
 			{{ country.nativeName }}
 		</p>
+		<p>
+			<strong class="country-label">Alpha2Code:</strong>
+			{{ country.alpha2Code }}
+		</p>
+		<p>
+			<strong class="country-label">Timezones:</strong>
+			{{ country.timezones }}
+		</p>
+		<p>
+			<strong class="country-label">Currencies:</strong>
+			{{ country.currencies[0].name }}
+		</p>
 	</div>
 	<div v-else>Loading country...</div>
 </template>
