@@ -6,7 +6,6 @@ import router from './router'
 import components from '@/components/UI'
 import Vintersection from '@/directives/Vintersection'
 import directives from '@/directives'
-import store from '@/store'
 
 const app = createApp(App);
 
@@ -20,6 +19,5 @@ directives.forEach(directive => {
 
 app
 	.use(router)
-	.use(store)
 	.directive('intersection', Vintersection)
 	.mount('#app')
