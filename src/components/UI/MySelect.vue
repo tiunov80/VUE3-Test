@@ -1,20 +1,23 @@
 <template>
-	<select
-		:value="modelValue"
-		name="select"
-		id=""
-		class="select"
-		@change="changeOption"
-	>
-		<option disabled value="">Sort by...</option>
-		<option
-			v-for="option in options"
-			:key="option.value"
-			:value="option.value"
+	<label
+		><select
+			:value="modelValue"
+			name="select"
+			id=""
+			class="select"
+			@change="changeOption"
+			aria-label="Sort by"
 		>
-			{{ option.name }}
-		</option>
-	</select>
+			<option disabled value="">Sort by...</option>
+			<option
+				v-for="option in options"
+				:key="option.value"
+				:value="option.value"
+			>
+				{{ option.name }}
+			</option>
+		</select></label
+	>
 </template>
 
 <script>
@@ -42,13 +45,13 @@ export default {
 .select {
 	display: flex;
 	border: 2px solid #ffffff;
-	background: transparent;
-	padding: 10px;
+	background: #181818;
+	padding: 10px 20px 10px 10px;
 	border-radius: 6px;
 	color: #ffffff;
 	font-size: 16px;
 	option {
-		color: black;
+		color: #ffffff;
 	}
 	&:focus {
 		outline: 4px solid #00bd7e;
