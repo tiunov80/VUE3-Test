@@ -1,5 +1,13 @@
 <template>
-	<input :value="modelValue" @input="updateInput" class="search-input" name="inp" />
+	<label for="search-inp">
+		<input
+			id="search-inp"
+			:value="modelValue"
+			@input="updateInput"
+			class="search-input"
+			name="inp"
+			aria-label="Search"
+	/></label>
 </template>
 
 <script>
