@@ -32,7 +32,7 @@ export default {
 	min-width: 300px;
 	display: block;
 	border: 2px solid #ffffff;
-	background: transparent;
+	background: #181818;
 	padding: 10px;
 	border-radius: 6px;
 	color: #ffffff;

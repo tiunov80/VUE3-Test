@@ -20,6 +20,11 @@ export const FirstStory = {
 		template: '<my-select v-bind="args" />',
 	}),
 	args: {
-		//👇 The args you need here will depend on your component
+		modelValue: '', // начальное значение
+		options: [
+			{ value: 'name', name: 'Sort by Name' },
+			{ value: 'capital', name: 'Sort by Capital' },
+			{ value: 'region', name: 'Sort by Region' },
+		],
 	},
 };

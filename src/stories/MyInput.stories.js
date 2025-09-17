@@ -20,6 +20,6 @@ export const FirstStory = {
 		template: '<my-input v-bind="args" />',
 	}),
 	args: {
-		//👇 The args you need here will depend on your component
+		modelValue: 'Hello World', // сразу отображается текст
 	},
 };
