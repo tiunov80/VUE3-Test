@@ -29,6 +29,7 @@ export default {
 <style lang="scss">
 .search-input {
 	width: 50%;
+	min-width: 300px;
 	display: block;
 	border: 2px solid #ffffff;
 	background: transparent;

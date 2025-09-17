@@ -32,6 +32,7 @@ export default defineConfig(({ command }) => {
     test: {
       projects: [
         {
+          name: 'storybook',
           extends: true,
           plugins: [
             storybookTest({
@@ -39,7 +40,7 @@ export default defineConfig(({ command }) => {
             }),
           ],
           test: {
-            name: 'storybook',
+
             browser: {
               enabled: true,
               headless: true,
