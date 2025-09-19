@@ -1,6 +1,14 @@
 <template>
 	<div class="test-page">
 		<h1>Countries</h1>
+		<p>
+			<a
+				href="https://cors-anywhere.herokuapp.com/corsdemo"
+				target="_blank"
+				>Click here to temporarily unlock access to the demo
+				Server
+			</a>
+		</p>
 		<div class="page-tools">
 			<my-input
 				v-focus
@@ -117,5 +125,14 @@ export default {
 .observer {
 	background: transparent;
 	padding: 10px;
+}
+p {
+	margin-bottom: 20px;
+}
+a {
+	text-decoration: underline;
+}
+a:hover {
+	text-decoration: none;
 }
 </style>
