@@ -13,6 +13,10 @@ const router = createRouter({
       path: '/countries-page',
       name: 'countries-page',
       component: () => import('../views/CountriesPage.vue'),
+    }, {
+      path: '/countries-page-composition-api-style',
+      name: 'countries-page-composition-api-style',
+      component: () => import('../views/countryPageCompositionApiStyle.vue'),
     },
     {
       path: '/country/:code',

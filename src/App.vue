@@ -11,6 +11,9 @@ import HelloWorld from './components/HelloWorld.vue';
 				<RouterLink to="/countries-page"
 					>Countries Page</RouterLink
 				>
+				<RouterLink to="/countries-page-composition-api-style"
+					>Countries Page Composition API</RouterLink
+				>
 			</nav>
 		</div>
 	</header>
