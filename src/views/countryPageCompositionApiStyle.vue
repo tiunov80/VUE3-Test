@@ -36,6 +36,9 @@ import { ref, computed, onMounted } from 'vue';
 import axios from 'axios';
 import CountryList from '@/components/CountryList.vue';
 
+// Tailwind styles
+import '@/index.css';
+
 // reactive vars
 const countries = ref([]);
 const isCountriesLoading = ref(false);

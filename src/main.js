@@ -7,6 +7,7 @@ import components from '@/components/UI'
 import Vintersection from '@/directives/Vintersection'
 import directives from '@/directives'
 
+
 const app = createApp(App);
 
 components.forEach(component => {

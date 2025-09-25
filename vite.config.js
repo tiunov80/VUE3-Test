@@ -3,7 +3,6 @@ import { fileURLToPath, URL } from 'node:url';
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import vueDevTools from 'vite-plugin-vue-devtools';
-// import Inspect from 'vite-plugin-inspect' // если понадобится
 
 import path from 'node:path';
 import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
@@ -20,7 +19,6 @@ export default defineConfig(({ command }) => {
     plugins: [
       vue(),
       !isStorybook && vueDevTools(),
-      // !isStorybook && Inspect(), // <-- если будешь подключать vite-plugin-inspect
     ].filter(Boolean),
 
     resolve: {
