@@ -1,4 +1,3 @@
-import './assets/main.css'
 
 import { createApp } from 'vue'
 import App from './App.vue'
@@ -6,7 +5,8 @@ import router from './router'
 import components from '@/components/UI'
 import Vintersection from '@/directives/Vintersection'
 import directives from '@/directives'
-
+import './index.css'
+import './assets/main.css'
 
 const app = createApp(App);
 
