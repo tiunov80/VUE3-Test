@@ -34,7 +34,7 @@
 					GraphQL from https://countries.trevorblades.com/
 				</h5>
 				<div v-if="loading">Loading...</div>
-				<ul v-else>
+				<ul v-else class="overflow">
 					<li v-for="c in result.countries" :key="c.code">
 						<strong class="name">{{ c.name }}</strong>
 						{{ c.code }} {{ c.emoji }}
@@ -154,5 +154,9 @@ a:hover {
 }
 .name {
 	font-weight: bold;
+}
+.overflow {
+	height: 500px;
+	overflow-y: auto;
 }
 </style>
