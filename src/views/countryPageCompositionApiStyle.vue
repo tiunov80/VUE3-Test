@@ -1,5 +1,5 @@
 <template>
-	<div class="test-page">
+	<section class="test-page">
 		<h1>Countries</h1>
 		<p>
 			<a
@@ -21,20 +21,38 @@
 			></my-select>
 		</div>
 
-		<country-list
-			:countries="displayedCountries"
-			v-if="!isCountriesLoading"
-		/>
-
-		<div v-else>Loading...</div>
+		<section class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-5">
+			<div>
+				<country-list
+					:countries="displayedCountries"
+					v-if="!isCountriesLoading"
+				/>
+				<div v-else>Loading...</div>
+			</div>
+			<div>
+				<h5 class="text-xl mb-4">
+					GraphQL from https://countries.trevorblades.com/
+				</h5>
+				<div v-if="loading">Loading...</div>
+				<ul v-else>
+					<li v-for="c in result.countries" :key="c.code">
+						<strong class="name">{{ c.name }}</strong>
+						{{ c.code }} {{ c.emoji }}
+					</li>
+				</ul>
+			</div>
+		</section>
 		<div v-intersection="loadMoreCountries" class="observer"></div>
-	</div>
+	</section>
 </template>
 
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 import axios from 'axios';
 import CountryList from '@/components/CountryList.vue';
+//GraphQL
+import { useQuery } from '@vue/apollo-composable';
+import gql from 'graphql-tag';
 
 // Tailwind styles
 import '@/index.css';
@@ -69,7 +87,7 @@ async function fetchCountries() {
 }
 
 function loadMoreCountries() {
-	console.log(sortedAndSearchedCountries.value.length);
+	// console.log(sortedAndSearchedCountries.value.length);
 	if (page.value * limit.value < sortedAndSearchedCountries.value.length) {
 		page.value += 1;
 	}
@@ -98,6 +116,17 @@ const displayedCountries = computed(() =>
 onMounted(() => {
 	fetchCountries();
 });
+
+//GraphQL
+const { result, loading, error } = useQuery(gql`
+	query {
+		countries {
+			code
+			name
+			emoji
+		}
+	}
+`);
 </script>
 
 <style scoped lang="scss">
@@ -122,5 +151,8 @@ a {
 }
 a:hover {
 	text-decoration: none;
+}
+.name {
+	font-weight: bold;
 }
 </style>

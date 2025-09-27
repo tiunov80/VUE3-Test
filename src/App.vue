@@ -12,7 +12,7 @@ import HelloWorld from './components/HelloWorld.vue';
 					>Countries Page</RouterLink
 				>
 				<RouterLink to="/countries-page-composition-api-style"
-					>Countries Page Composition API</RouterLink
+					>Page Composition API with GraphQL</RouterLink
 				>
 			</nav>
 		</div>

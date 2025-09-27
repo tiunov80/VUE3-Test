@@ -7,6 +7,9 @@ import Vintersection from '@/directives/Vintersection'
 import directives from '@/directives'
 import './index.css'
 import './assets/main.css'
+import { apolloClient } from './apollo'
+import { DefaultApolloClient } from '@vue/apollo-composable'
+
 
 const app = createApp(App);
 
@@ -21,4 +24,5 @@ directives.forEach(directive => {
 app
 	.use(router)
 	.directive('intersection', Vintersection)
+	.provide(DefaultApolloClient, apolloClient)
 	.mount('#app')
