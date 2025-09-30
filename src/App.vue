@@ -1,10 +1,9 @@
 <script>
 import { RouterLink, RouterView } from 'vue-router';
-import HelloWorld from './components/HelloWorld.vue';
 </script>
 
 <template>
-	<header>
+	<header class="b-header">
 		<div class="wrapper">
 			<nav class="nav">
 				<RouterLink to="/">Home</RouterLink>
@@ -14,6 +13,7 @@ import HelloWorld from './components/HelloWorld.vue';
 				<RouterLink to="/countries-page-composition-api-style"
 					>Page Composition API with GraphQL</RouterLink
 				>
+				<RouterLink to="/Favorites">Favorites</RouterLink>
 			</nav>
 		</div>
 	</header>
@@ -22,6 +22,11 @@ import HelloWorld from './components/HelloWorld.vue';
 </template>
 
 <style lang="scss" scoped>
+.b-header {
+	margin-bottom: 40px;
+	padding-bottom: 30px;
+	border-bottom: 2px solid #00bd7e;
+}
 .main {
 	display: flex;
 	flex-direction: column;
