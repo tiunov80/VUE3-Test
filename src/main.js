@@ -9,9 +9,11 @@ import './index.css'
 import './assets/main.css'
 import { apolloClient } from './apollo'
 import { DefaultApolloClient } from '@vue/apollo-composable'
+import { createPinia } from 'pinia'
+import { useFavoritesStore } from '@/stores/favorites'
 
-
-const app = createApp(App);
+const app = createApp(App)
+const pinia = createPinia()
 
 components.forEach(component => {
 	app.component(component.name, component)
@@ -23,6 +25,15 @@ directives.forEach(directive => {
 
 app
 	.use(router)
+	.use(pinia)
 	.directive('intersection', Vintersection)
 	.provide(DefaultApolloClient, apolloClient)
-	.mount('#app')
+
+
+//Pinia subscription 
+const favorites = useFavoritesStore(pinia)
+favorites.$subscribe((mutation, state) => {
+	localStorage.setItem('favorites', JSON.stringify(state.items))
+})
+
+app.mount('#app')
